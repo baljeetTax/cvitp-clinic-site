@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Community Volunteer Income Tax Clinic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7f2ea;
+      --bg-alt: #fffaf3;
+      --primary: #b47b4e;
+      --primary-soft: #e3c3a4;
+      --text: #3b2b23;
+      --text-soft: #5b4a3f;
+      --border: #e0d2c2;
+      --accent: #c89a6b;
+      --error: #b03b3b;
+      --success: #2f7d4a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 242, 234, 0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.6rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid transparent;
+    }
+
+    .nav-links a:hover {
+      border-color: var(--primary-soft);
+      background: #fff;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    section {
+      margin: 2.5rem 0;
+      padding: 1.75rem 1.5rem;
+      border-radius: 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+    }
+
+    section:nth-of-type(odd) {
+      background: #fff;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0.25rem 0 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-badge span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+        transform 0.05s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: #9f6a42;
+      border-color: #9f6a42;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary-soft);
+      background: #fffaf5;
+      transform: translateY(-1px);
+    }
+
+    .hero-image {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f0e0cf, #f7f2ea);
+      border: 1px solid var(--border);
+      min-height: 220px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .hero-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.7) 0, transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.5) 0, transparent 55%);
+      opacity: 0.9;
+    }
+
+    .hero-photo-card {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-avatar-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #f3e0cf;
+      border: 2px solid #fff;
+      margin-left: -10px;
+    }
+
+    .hero-avatar:first-child {
+      margin-left: 0;
+    }
+
+    .hero-photo-text {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .hero-photo-text strong {
+      color: var(--text);
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: #f5ebe0;
+      color: var(--text-soft);
+    }
+
+    ul, ol {
+      padding-left: 1.2rem;
+      margin: 0.4rem 0 0.75rem;
+    }
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+
+    .checklist li::marker {
+      color: var(--accent);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .info-card {
+      padding: 1rem 1rem;
+      border-radius: 12px;
+      background: #fffaf5;
+      border: 1px solid var(--border);
+    }
+
+    .info-card h3 {
+      margin-top: 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #f5ebe0;
+      color: var(--text-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    form {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea,
+    input[type="date"],
+    input[type="time"] {
+      padding: 0.5rem 0.6rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(180, 123, 78, 0.25);
+    }
+
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .radio-item,
+    .checkbox-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .form-section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .form-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0.5rem 0 0.25rem;
+    }
+
+    .required {
+      color: var(--error);
+      margin-left: 0.15rem;
+    }
+
+    .form-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .form-footer strong {
+      color: var(--text);
+    }
+
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem 2rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    footer p {
+      margin: 0.25rem 0;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .two-column {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .form-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      section {
+        padding: 1.4rem 1.1rem;
+      }
+
+      main {
+        padding-inline: 1rem;
+      }
+
+      .nav {
+        padding-inline: 1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="nav-logo">Community Volunteer Income Tax Clinic</div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#hero">Home</a>
+        <a href="#eligibility">Who qualifies</a>
+        <a href="#documents">What to bring</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#intake">Intake & booking</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="hero">
+      <div class="hero">
+        <div>
+          <div class="hero-badge">
+            <span></span>
+            Free tax help for eligible community members
+          </div>
+          <h1>Get your taxes done with friendly, free support</h1>
+          <p class="hero-subtitle">
+            Our Community Volunteer Income Tax Clinic helps eligible individuals file their income tax returns
+            in a warm, welcoming environment—at no cost.
+          </p>
+          <div class="pill-list" aria-hidden="true">
+            <div class="pill">Free CVITP clinic</div>
+            <div class="pill">Drop-off or Zoom</div>
+            <div class="pill">Community volunteers</div>
+            <div class="pill">Simple, confidential, supportive</div>
+          </div>
+          <div class="hero-actions">
+            <a href="#intake" class="btn btn-primary">Start intake & book appointment</a>
+            <a href="#eligibility" class="btn btn-outline">Check if you qualify</a>
+          </div>
+        </div>
+        <div class="hero-image" aria-hidden="true">
+          <div class="hero-photo-card">
+            <div class="hero-avatar-group">
+              <div class="hero-avatar"></div>
+              <div class="hero-avatar"></div>
+              <div class="hero-avatar"></div>
+            </div>
+            <div class="hero-photo-text">
+              <strong>Real neighbours, real help.</strong><br />
+              Volunteers from your community helping you file your taxes with care.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who qualifies -->
+    <section id="eligibility">
+      <h2>Who qualifies for this clinic?</h2>
+      <p>
+        This clinic follows the Community Volunteer Income Tax Program (CVITP) guidelines. You may qualify if
+        you have a <strong>modest income</strong> and a <strong>simple tax situation</strong>.
+      </p>
+      <div class="two-column">
+        <div class="info-card">
+          <h3>Generally eligible if:</h3>
+          <ul class="checklist">
+            <li>You have a modest income (for example, low or fixed income)</li>
+            <li>Your tax situation is simple (employment income, pension, benefits, etc.)</li>
+            <li>You do not have self-employment or business income</li>
+            <li>You do not have rental income</li>
+            <li>You have not declared bankruptcy</li>
+            <li>You are filing a personal income tax return (not for a business)</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>If you're not sure, that's okay</h3>
+          <p>
+            If you’re unsure whether you qualify, you can still start the intake form. We’ll review your
+            information and let you know if this clinic is the right fit or if another service would be better.
+          </p>
+          <p><strong>It’s always okay to ask.</strong></p>
+          <a href="#intake" class="btn btn-outline">Start intake & we’ll review</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What to bring -->
+    <section id="documents">
+      <h2>What to bring to your appointment</h2>
+      <p>
+        Having the right documents ready makes your appointment smoother and helps us complete your return
+        accurately.
+      </p>
+      <div class="two-column">
+        <div>
+          <h3>Identification & personal information</h3>
+          <ul class="checklist">
+            <li>Government-issued photo ID (if available)</li>
+            <li>Your Social Insurance Number (SIN)</li>
+            <li>Your spouse/partner’s full name and date of birth (if applicable)</li>
+            <li>Information about your dependents (names, dates of birth)</li>
+          </ul>
+
+          <h3>Tax slips</h3>
+          <ul class="checklist">
+            <li>T4 slips (employment income)</li>
+            <li>T4A, T4A(P), T4A(OAS), T4E, or other benefit slips</li>
+            <li>T5 slips (investment income), if applicable</li>
+            <li>Any other tax slips you received</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Receipts & other documents</h3>
+          <ul class="checklist">
+            <li>Rent or property tax information (if applicable)</li>
+            <li>Medical expense receipts (if applicable)</li>
+            <li>Charitable donation receipts</li>
+            <li>Child care expense receipts</li>
+            <li>Last year’s Notice of Assessment (if available)</li>
+            <li>Direct deposit information (void cheque or banking details)</li>
+          </ul>
+          <p class="hint">
+            If you’re missing something, bring what you have. We’ll do our best to help you move forward.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works">
+      <h2>How the clinic works</h2>
+      <p>
+        We offer two ways to have your taxes done: <strong>drop-off</strong> and <strong>online via Zoom</strong>.
+        Both options are free and handled by trained community volunteers.
+      </p>
+      <div class="two-column">
+        <div class="info-card">
+          <div class="tag">Option 1: Drop-off</div>
+          <h3>Drop off your documents</h3>
+          <ol class="steps">
+            <li>Complete the intake form and choose “Drop-off” as your appointment type.</li>
+            <li>Bring your documents to the clinic at your scheduled time.</li>
+            <li>Our volunteers prepare your return after you leave.</li>
+            <li>We contact you by email if we have questions or when your return is ready.</li>
+          </ol>
+          <p class="hint">
+            This option is helpful if you prefer not to stay for a full appointment or have limited time.
+          </p>
+        </div>
+        <div class="info-card">
+          <div class="tag">Option 2: Zoom</div>
+          <h3>Meet with us online</h3>
+          <ol class="steps">
+            <li>Complete the intake form and choose “Zoom” as your appointment type.</li>
+            <li>At your appointment time, join the Zoom meeting using the link we send you.</li>
+            <li>Share your documents securely and review your information with a volunteer.</li>
+            <li>We complete your return and confirm details with you.</li>
+          </ol>
+          <p class="hint">
+            This option is helpful if you prefer to stay at home or have mobility or transportation challenges.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Intake & booking -->
+    <section id="intake">
+      <h2>Intake form & appointment booking</h2>
+      <p>
+        Please complete this form as fully as you can. It helps us confirm your eligibility, prepare for your
+        appointment, and match you with the right volunteer.
+      </p>
+
+      <!-- NOTE: You can later connect this form to a backend or service of your choice -->
+      <form>
+        <!-- Personal information -->
+        <div>
+          <div class="form-section-title">1. Personal information</div>
+          <div class="form-section-subtitle">
+            Tell us a bit about yourself so we can contact you and prepare your file.
+          </div>
+          <div class="form-divider"></div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full name<span class="required">*</span></label>
+              <input type="text" id="fullName" name="fullName" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email address<span class="required">*</span></label>
+              <input type="email" id="email" name="email" required />
+              <div class="hint">We will use this to confirm your appointment and send any follow-up information.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Home address<span class="required">*</span></label>
+              <input type="text" id="address" name="address" required />
+            </div>
+
+            <div class="form-group">
+              <label for="city">City / town</label>
+              <input type="text" id="city" name="city" />
+            </div>
+
+            <div class="form-group">
+              <label for="postalCode">Postal code</label>
+              <input type="text" id="postalCode" name="postalCode" />
+            </div>
+
+            <div class="form-group">
+              <label for="dob">Date of birth</label>
+              <input type="date" id="dob" name="dob" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Household & income -->
+        <div>
+          <div class="form-section-title">2. Household & income</div>
+          <div class="form-section-subtitle">
+            This helps us confirm your eligibility under the CVITP guidelines.
+          </div>
+          <div class="form-divider"></div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="maritalStatus">Marital status<span class="required">*</span></label>
+              <select id="maritalStatus" name="maritalStatus" required>
+                <option value="">Please select</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="common-law">Common-law</option>
+                <option value="separated">Separated</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="dependents">Number of dependents<span class="required">*</span></label>
+              <input type="number" id="dependents" name="dependents" min="0" required />
+            </div>
+
+            <div class="form-group">
+              <label for="lastYearIncome">Approximate total income from last year<span class="required">*</span></label>
+              <input type="text" id="lastYearIncome" name="lastYearIncome" required />
+              <div class="hint">An estimate is okay if you’re not sure of the exact amount.</div>
+            </div>
+
+            <div class="form-group">
+              <label>Type of income you received<span class="required">*</span></label>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="incomeType" value="employment" />
+                  Employment income
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="incomeType" value="pension" />
+                  Pension / retirement
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="incomeType" value="benefits" />
+                  Government benefits (e.g., EI, CPP, OAS)
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="incomeType" value="investment" />
+                  Investment income
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="incomeType" value="other" />
+                  Other simple income
+                </label>
+              </div>
+              <div class="hint">
+                If you have self-employment, business, or rental income, this clinic may not be able to help.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Citizenship & electors list -->
+        <div>
+          <div class="form-section-title">3. Citizenship & electors list</div>
+          <div class="form-section-subtitle">
+            These questions relate to your status in Canada and the national list of electors.
+          </div>
+          <div class="form-divider"></div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Are you a Canadian citizen?<span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-item">
+                  <input type="radio" name="citizenship" value="yes" required />
+                  Yes
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="citizenship" value="no" required />
+                  No
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>
+                If you are a Canadian citizen, do you agree to have your name, address, and citizenship added to
+                the national list of electors?
+              </label>
+              <div class="radio-group">
+                <label class="radio-item">
+                  <input type="radio" name="electorsConsent" value="yes" />
+                  Yes, I agree
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="electorsConsent" value="no" />
+                  No, I do not agree
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="electorsConsent" value="not-applicable" />
+                  Not applicable / not a Canadian citizen
+                </label>
+              </div>
+              <div class="hint">
+                This question is optional and does not affect your eligibility for the clinic.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Appointment details -->
+        <div>
+          <div class="form-section-title">4. Appointment type & time</div>
+          <div class="form-section-subtitle">
+            Choose how you would like to meet and suggest a date and time that works for you.
+          </div>
+          <div class="form-divider"></div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Preferred appointment type<span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-item">
+                  <input type="radio" name="appointmentType" value="dropoff" required />
+                  Drop-off
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="appointmentType" value="zoom" required />
+                  Zoom (online)
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="appointmentDate">Preferred date<span class="required">*</span></label>
+              <input type="date" id="appointmentDate" name="appointmentDate" required />
+            </div>
+
+            <div class="form-group">
+              <label for="appointmentTime">Preferred time<span class="required">*</span></label>
+              <input type="time" id="appointmentTime" name="appointmentTime" required />
+              <div class="hint">
+                We will confirm your appointment by email and may suggest a nearby time if your first choice is
+                not available.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="accessNeeds">Accessibility or other needs</label>
+              <textarea id="accessNeeds" name="accessNeeds" placeholder="Tell us anything that would help us support you (e.g., language, mobility, technology)."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional info -->
+        <div>
+          <div class="form-section-title">5. Anything else we should know?</div>
+          <div class="form-section-subtitle">
+            Optional: share any details that might help us prepare for your appointment.
+          </div>
+          <div class="form-divider"></div>
+
+          <div class="form-group">
+            <label for="additionalInfo">Additional information (optional)</label>
+            <textarea id="additionalInfo" name="additionalInfo"></textarea>
+          </div>
+        </div>
+
+        <!-- Consent & submit -->
+        <div>
+          <div class="form-section-title">6. Consent & submit</div>
+          <div class="form-divider"></div>
+
+          <div class="form-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="privacyConsent" required />
+              I understand that this clinic is part of the Community Volunteer Income Tax Program (CVITP) and
+              that my information will be used only to help prepare my income tax return and to contact me about
+              my appointment.
+            </label>
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary">Submit intake & request appointment</button>
+            <div>
+              <strong>What happens next?</strong><br />
+              We will review your information, confirm your eligibility, and email you with your appointment
+              details or any follow-up questions.
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2>About this clinic</h2>
+      <p>
+        This clinic is run by community volunteers as part of the Community Volunteer Income Tax Program (CVITP).
+        Our goal is to make tax filing <strong>less stressful</strong> and more <strong>accessible</strong> for
+        people with modest incomes and simple tax situations.
+      </p>
+      <p>
+        We believe that everyone deserves to access the benefits and credits they are entitled to. By offering
+        free, friendly tax help, we hope to reduce barriers and support our neighbours in feeling more confident
+        and secure.
+      </p>
+      <p>
+        Volunteers receive training and follow CVITP guidelines. While we cannot handle every type of tax
+        situation, we will always do our best to point you in the right direction if another service would be
+        more appropriate.
+      </p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact the clinic</h2>
+      <p>
+        If you have questions before filling out the intake form, you can contact us by email. We’ll respond as
+        soon as we can.
+      </p>
+      <div class="info-card">
+        <h3>Email</h3>
+        <p>
+          <strong>Clinic email:</strong>
+          <!-- Replace this with your real email address -->
+          <a href="mailto:baljeet@baljeetstaxclinic.com">baljeet@baljeetstaxclinic.com</a>
+        </p>
+        <p class="hint">
+          Please do not send sensitive personal information by email. Use the intake form for tax-related
+          details.
+        </p>
+      </div>
+    </section>
+
+    <!-- Privacy & consent -->
+    <section id="privacy">
+      <h2>Privacy & consent</h2>
+      <p>
+        Your privacy matters. Information you share with this clinic is collected only for the purpose of
+        helping prepare your income tax return and managing your appointment.
+      </p>
+      <ul class="checklist">
+        <li>Your information is handled by trained volunteers following CVITP guidelines.</li>
+        <li>We only collect the information we need to help prepare your return.</li>
+        <li>We do not share your information outside of the tax preparation process, except as required by law.</li>
+        <li>We will permanantly delete your information upon filing of your taxes and will not have access to them afterwards.</li>
+      </ul>
+      <p class="hint">
+        If you have questions or concerns about how your information is used, please contact us by email before
+        submitting the intake form.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Community Volunteer Income Tax Clinic &mdash; CVITP-aligned, free tax help for eligible individuals.</p>
+    <p>This website is for informational purposes and does not replace professional tax or legal advice.</p>
+  </footer>
+</body>
+</html>
