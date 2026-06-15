@@ -685,253 +685,36 @@
     </section>
 
     <!-- Intake & booking -->
-    <section id="intake">
-      <h2>Intake form & appointment booking</h2>
-      <p>
-        Please complete this form as fully as you can. It helps us confirm your eligibility, prepare for your
-        appointment, and match you with the right volunteer.
-      </p>
+<section id="intake">
+  <h2>Intake form & appointment booking</h2>
+  <p>
+    To help us prepare for your appointment and confirm your eligibility, please complete our secure online
+    intake form. It only takes a few minutes and includes your appointment request (drop-off or Zoom).
+  </p>
 
-      <!-- NOTE: You can later connect this form to a backend or service of your choice -->
-      <form>
-        <!-- Personal information -->
-        <div>
-          <div class="form-section-title">1. Personal information</div>
-          <div class="form-section-subtitle">
-            Tell us a bit about yourself so we can contact you and prepare your file.
-          </div>
-          <div class="form-divider"></div>
+  <div class="info-card" style="text-align: center; padding: 2rem;">
+    <h3>Start your intake form</h3>
+    <p>
+      Click the button below to open the intake form in a new tab.  
+      After you submit it, we will contact you by email to confirm your appointment.
+    </p>
 
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="fullName">Full name<span class="required">*</span></label>
-              <input type="text" id="fullName" name="fullName" required />
-            </div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfrBtHBaI0Cy49CJd-7ZvL9OgZPvV5Sj5f4cQQQdAAMQIScog/viewform"
+       target="_blank"
+       class="btn btn-primary"
+       style="margin-top: 1rem; font-size: 1.1rem; padding: 0.8rem 1.4rem;">
+      Open Intake Form
+    </a>
 
-            <div class="form-group">
-              <label for="email">Email address<span class="required">*</span></label>
-              <input type="email" id="email" name="email" required />
-              <div class="hint">We will use this to confirm your appointment and send any follow-up information.</div>
-            </div>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">
+      If the button doesn’t work, you can use this link:<br>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfrBtHBaI0Cy49CJd-7ZvL9OgZPvV5Sj5f4cQQQdAAMQIScog/viewform" target="_blank">
+        https://docs.google.com/forms/d/e/1FAIpQLSfrBtHBaI0Cy49CJd-7ZvL9OgZPvV5Sj5f4cQQQdAAMQIScog/viewform
+      </a>
+    </p>
+  </div>
+</section>
 
-            <div class="form-group">
-              <label for="address">Home address<span class="required">*</span></label>
-              <input type="text" id="address" name="address" required />
-            </div>
-
-            <div class="form-group">
-              <label for="city">City / town</label>
-              <input type="text" id="city" name="city" />
-            </div>
-
-            <div class="form-group">
-              <label for="postalCode">Postal code</label>
-              <input type="text" id="postalCode" name="postalCode" />
-            </div>
-
-            <div class="form-group">
-              <label for="dob">Date of birth</label>
-              <input type="date" id="dob" name="dob" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Household & income -->
-        <div>
-          <div class="form-section-title">2. Household & income</div>
-          <div class="form-section-subtitle">
-            This helps us confirm your eligibility under the CVITP guidelines.
-          </div>
-          <div class="form-divider"></div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="maritalStatus">Marital status<span class="required">*</span></label>
-              <select id="maritalStatus" name="maritalStatus" required>
-                <option value="">Please select</option>
-                <option value="single">Single</option>
-                <option value="married">Married</option>
-                <option value="common-law">Common-law</option>
-                <option value="separated">Separated</option>
-                <option value="divorced">Divorced</option>
-                <option value="widowed">Widowed</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="dependents">Number of dependents<span class="required">*</span></label>
-              <input type="number" id="dependents" name="dependents" min="0" required />
-            </div>
-
-            <div class="form-group">
-              <label for="lastYearIncome">Approximate total income from last year<span class="required">*</span></label>
-              <input type="text" id="lastYearIncome" name="lastYearIncome" required />
-              <div class="hint">An estimate is okay if you’re not sure of the exact amount.</div>
-            </div>
-
-            <div class="form-group">
-              <label>Type of income you received<span class="required">*</span></label>
-              <div class="checkbox-group">
-                <label class="checkbox-item">
-                  <input type="checkbox" name="incomeType" value="employment" />
-                  Employment income
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="incomeType" value="pension" />
-                  Pension / retirement
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="incomeType" value="benefits" />
-                  Government benefits (e.g., EI, CPP, OAS)
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="incomeType" value="investment" />
-                  Investment income
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="incomeType" value="other" />
-                  Other simple income
-                </label>
-              </div>
-              <div class="hint">
-                If you have self-employment, business, or rental income, this clinic may not be able to help.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Citizenship & electors list -->
-        <div>
-          <div class="form-section-title">3. Citizenship & electors list</div>
-          <div class="form-section-subtitle">
-            These questions relate to your status in Canada and the national list of electors.
-          </div>
-          <div class="form-divider"></div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Are you a Canadian citizen?<span class="required">*</span></label>
-              <div class="radio-group">
-                <label class="radio-item">
-                  <input type="radio" name="citizenship" value="yes" required />
-                  Yes
-                </label>
-                <label class="radio-item">
-                  <input type="radio" name="citizenship" value="no" required />
-                  No
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>
-                If you are a Canadian citizen, do you agree to have your name, address, and citizenship added to
-                the national list of electors?
-              </label>
-              <div class="radio-group">
-                <label class="radio-item">
-                  <input type="radio" name="electorsConsent" value="yes" />
-                  Yes, I agree
-                </label>
-                <label class="radio-item">
-                  <input type="radio" name="electorsConsent" value="no" />
-                  No, I do not agree
-                </label>
-                <label class="radio-item">
-                  <input type="radio" name="electorsConsent" value="not-applicable" />
-                  Not applicable / not a Canadian citizen
-                </label>
-              </div>
-              <div class="hint">
-                This question is optional and does not affect your eligibility for the clinic.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Appointment details -->
-        <div>
-          <div class="form-section-title">4. Appointment type & time</div>
-          <div class="form-section-subtitle">
-            Choose how you would like to meet and suggest a date and time that works for you.
-          </div>
-          <div class="form-divider"></div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Preferred appointment type<span class="required">*</span></label>
-              <div class="radio-group">
-                <label class="radio-item">
-                  <input type="radio" name="appointmentType" value="dropoff" required />
-                  Drop-off
-                </label>
-                <label class="radio-item">
-                  <input type="radio" name="appointmentType" value="zoom" required />
-                  Zoom (online)
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="appointmentDate">Preferred date<span class="required">*</span></label>
-              <input type="date" id="appointmentDate" name="appointmentDate" required />
-            </div>
-
-            <div class="form-group">
-              <label for="appointmentTime">Preferred time<span class="required">*</span></label>
-              <input type="time" id="appointmentTime" name="appointmentTime" required />
-              <div class="hint">
-                We will confirm your appointment by email and may suggest a nearby time if your first choice is
-                not available.
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="accessNeeds">Accessibility or other needs</label>
-              <textarea id="accessNeeds" name="accessNeeds" placeholder="Tell us anything that would help us support you (e.g., language, mobility, technology)."></textarea>
-            </div>
-          </div>
-        </div>
-
-        <!-- Additional info -->
-        <div>
-          <div class="form-section-title">5. Anything else we should know?</div>
-          <div class="form-section-subtitle">
-            Optional: share any details that might help us prepare for your appointment.
-          </div>
-          <div class="form-divider"></div>
-
-          <div class="form-group">
-            <label for="additionalInfo">Additional information (optional)</label>
-            <textarea id="additionalInfo" name="additionalInfo"></textarea>
-          </div>
-        </div>
-
-        <!-- Consent & submit -->
-        <div>
-          <div class="form-section-title">6. Consent & submit</div>
-          <div class="form-divider"></div>
-
-          <div class="form-group">
-            <label class="checkbox-item">
-              <input type="checkbox" name="privacyConsent" required />
-              I understand that this clinic is part of the Community Volunteer Income Tax Program (CVITP) and
-              that my information will be used only to help prepare my income tax return and to contact me about
-              my appointment.
-            </label>
-          </div>
-
-          <div class="form-footer">
-            <button type="submit" class="btn btn-primary">Submit intake & request appointment</button>
-            <div>
-              <strong>What happens next?</strong><br />
-              We will review your information, confirm your eligibility, and email you with your appointment
-              details or any follow-up questions.
-            </div>
-          </div>
-        </div>
-      </form>
-    </section>
 
     <!-- About -->
     <section id="about">
